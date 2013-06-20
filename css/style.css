@@ -1,0 +1,33 @@
+#title {
+  width:248px;
+  height: 100px;
+  position: absolute;
+  top: 0px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background: white;
+  padding: 8px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+#instructions {
+  width:248px;
+  height: 353px;
+  top: 100px;
+  position: absolute;
+  font-family: Tahoma;
+  font-size: 12px;
+  color: black;
+  background: white;
+  padding: 8px;
+}
+#image {
+  position:relative;
+  margin: 0 auto;
+  margin-left: 900px;
+  height: auto;
+  width: auto;
+  float: left;
+}

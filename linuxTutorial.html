@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="jqconsole/css/ansi.css" type="text/css" media="all" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jqconsole/lib/jqconsole.js"></script>
+    <script src="lib/instructions.js"></script>
+    <script src="lib/filesystem.js"></script>
+    <script src="lib/commands.js"></script>
+    <script src="lib/tutorial1.js"></script>
+    <script src="lib/tutorial2.js"></script>
+    <script src="lib/tutorial3.js"></script>
+    <script src="lib/linuxTutorial.js"></script>
+    <style>
+      html, body {
+        background-color: #333;
+        color: white;
+        font-family: monospace;
+        margin: 0;
+        padding: 0;
+      }
+      /* The console container element */
+      #console {
+        height: 400px;
+        width: 500px;
+        position:relative;
+        background-color: black;
+        border: 2px solid #CCC;
+        margin: 0 auto;
+        margin-top: 50px;
+      }
+      /* The inner console element. */
+      .jqconsole {
+        padding: 10px;
+        padding-bottom: 10px;
+      }
+      /* The cursor. */
+      .jqconsole-cursor {
+        background-color: #999;
+      }
+      /* The cursor color when the console looses focus. */
+      .jqconsole-blurred .jqconsole-cursor {
+        background-color: #666;
+      }
+      /* The current prompt text color */
+      .jqconsole-prompt {
+        color: #0d0;
+      }
+      /* The command history */
+      .jqconsole-old-prompt {
+        color: #0b0;
+        font-weight: normal;
+      }
+      /* The text color when in input mode. */
+      .jqconsole-input {
+        color: #ff0;
+      }
+      /* Previously entered input. */
+      .jqconsole-old-input {
+        color: #bb0;
+        font-weight: normal;
+      }
+      .brace {
+        color: #00FFFF;
+      }
+      .paran {
+        color: #FF00FF;
+      }
+      .bracket {
+        color: #FFFF00;
+      }
+      .jqconsole-composition {
+        background-color: red;
+      }
+      /* The text color of the output. */
+      .jqconsole-output {
+        color: white;
+      }
+    </style>
+    <script>
+      $(function() {
+        // Creating the console.
+        var header = "";
+        window.jqconsole = $('#console').jqconsole(header, 'pi@Kano:/$ ');
+
+        // Abort prompt on Ctrl+Z.
+        jqconsole.RegisterShortcut('Z', function() {
+          jqconsole.AbortPrompt();
+          handler();
+        });
+        
+        // Move to line start Ctrl+A.
+        jqconsole.RegisterShortcut('A', function() {
+          jqconsole.MoveToStart();
+          handler();
+        });
+        
+        // Move to line end Ctrl+E.
+        jqconsole.RegisterShortcut('E', function() {
+          jqconsole.MoveToEnd();
+          handler();
+        });
+
+        // Ctrl+R: resets the console.  
+        jqconsole.RegisterShortcut('R', function() {
+          jqconsole.Reset();
+          handler();
+        });
+
+        // Handle a command
+        var handler = function(command) {
+	  // Process the command
+          if (command) {
+ 	    runLesson(command);
+	    handler(); // Needed for clear()
+          }
+          jqconsole.Prompt(true, handler, function(command) {
+            // Continue line if can't compile the command.
+            try {
+              //Function(command);
+            } catch (e) {
+              if (/[\[\{\(]$/.test(command)) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }
+            return false;
+          });
+        };
+	// Redirect focus to the console whenever the user clicks anywhere.  
+    	$(window).click(function() {  
+      	  jqconsole.Focus();  
+    	}) 
+        // Initiate the first prompt.
+        handler();
+      });
+    </script>
+  </head>
+  <div id="title">
+	Lesson 1.1: Welcome
+  </div>
+  <div id="instructions">
+	<i>Linux</i> is an open source operating system. There are two posible ways of using it: through the graphical interface (boring...) or through a command-line interface, called the <i>shell</i>.<br><br>
+        You will learn how to use the shell (the black window) with this tutorial. The $ sign is called a <i>terminal prompt</i>.<br><br>
+        Just to warm up type <b>Echo</b> and press enter.
+  </div>
+  <div id="image">
+    <img id='systemImg' src="images/filesystem1.png" alt="file system" style="visibility:hidden">
+  </div>
+  <body>
+    <div id="console"></div>
+  </body>
+</html>
