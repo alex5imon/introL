@@ -6,6 +6,11 @@
  <li>Tutorial 3: file operations</li>
 </ul>
 
+##Instructions
+(1) Download the zip
+(2) Unzip it
+(3) Open linuxTutorial.html on a browser to run the tutorial
+
 ##Libraries used
 
 <a href="https://github.com/replit/jq-console">jq-console</a>
