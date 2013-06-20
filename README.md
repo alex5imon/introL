@@ -7,9 +7,11 @@
 </ul>
 
 ##Instructions
-(1) Download the zip
-(2) Unzip it
-(3) Open linuxTutorial.html on a browser to run the tutorial
+<ol>
+  <li>Download the zip</li>
+  <li>Unzip it</li>
+  <li>Open linuxTutorial.html on a browser to run the tutorial</li>
+</ol>
 
 ##Libraries used
 
